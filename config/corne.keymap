@@ -41,8 +41,8 @@
                 };
                 combo_caps_word {
                         timeout-ms = <50>;
-                        key-positions = <38 39>;  /* Space + Enter -> Caps Word */
-                        bindings = <&caps_word>;
+                        key-positions = <38 39>;  /* Space + Enter -> Caps Lock (toggle) */
+                        bindings = <&kp CAPS>;
                 };
         };
 
