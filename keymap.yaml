@@ -59,7 +59,7 @@ layers:
   - G
   - H
   - F
-  - Esc
+  - {t: ⇧, s: OSS}
   - {t: ⇧ Maj, h: NAV}
   - ⌫ Retour
   - Espace
@@ -153,7 +153,6 @@ layers:
   - {type: held}
   - {t: ▽, type: trans}
   FN:
-  - {t: ▽, type: trans}
   - F1
   - F2
   - F3
@@ -166,6 +165,7 @@ layers:
   - F10
   - F11
   - F12
+  - {t: ▽, type: trans}
   - {t: BT, s: '0'}
   - {t: BT, s: '1'}
   - {t: BT, s: '2'}
@@ -195,10 +195,53 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {type: held}
+  AltGr (BÉPO · maintenir R):
+  - ˘
+  - '|'
+  - {t: ´, s: morte}
+  - '&'
+  - œ
+  - {t: '`', s: morte}
+  - ¡
+  - {t: ˇ, s: morte}
+  - ð
+  - ə
+  - ŀ
+  - ȷ
+  - ¸
+  - æ
+  - ù
+  - {t: ¨, s: morte}
+  - €
+  - {t: ¸, s: morte}
+  - ©
+  - þ
+  - ß
+  - {type: held}
+  - {t: '~', s: morte}
+  - ¯
+  - –
+  - \
+  - '{'
+  - '}'
+  - …
+  - '~'
+  - ¿
+  - °
+  - µ
+  - †
+  - ˛
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
 combos:
 - p: [19, 20]
   k: Escape
   l: [BÉPO]
 - p: [38, 39]
-  k: Caps Word
+  k: Caps Lock
   l: [BÉPO]
