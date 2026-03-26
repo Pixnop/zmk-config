@@ -1,13 +1,13 @@
 # Corne Wireless Mechboards - BEPO layout
 # Board: nice_nano_v2 (compatible with SuperMini nRF52840)
-# Display: nice!view (MIP) via nice_view_adapter + nice_view_gem
+# Display: nice!view (MIP) via zmk-nice-oled module (nice_epaper)
 ---
 include:
   - board: nice_nano_v2
-    shield: corne_left nice_view_adapter nice_view_gem
+    shield: corne_left nice_view_adapter nice_epaper
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
   - board: nice_nano_v2
-    shield: corne_right nice_view_adapter nice_view_gem
+    shield: corne_right nice_view_adapter nice_epaper
   - board: nice_nano_v2
     shield: settings_reset
