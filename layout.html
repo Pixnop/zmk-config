@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Corne BÉPO — Cheat Sheet</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  @page { size: A4 landscape; margin: 8mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: #f5f5f7; color: #1d1d1f;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 16px; min-height: 100vh;
+  }
+  h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 11px; color: #86868b; margin: 2px 0 12px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 1100px; width: 100%; }
+
+  .layer-card {
+    background: #fff; border-radius: 14px; padding: 14px 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.04);
+  }
+  .layer-header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+  }
+  .layer-badge {
+    font-size: 10px; font-weight: 700; color: #fff;
+    padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .l0 .layer-badge { background: #007aff; }
+  .l1 .layer-badge { background: #ff9500; }
+  .l2 .layer-badge { background: #34c759; }
+  .l3 .layer-badge { background: #af52de; }
+  .layer-name { font-size: 14px; font-weight: 600; }
+  .layer-hint { font-size: 10px; color: #86868b; margin-left: auto; }
+
+  .board { display: flex; justify-content: center; gap: 24px; }
+  .half { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
+
+  .key {
+    width: 54px; height: 46px;
+    border-radius: 7px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative;
+    font-weight: 500;
+    transition: transform 0.1s;
+    border: none;
+  }
+  .key.std {
+    background: linear-gradient(180deg, #f8f8fa 0%, #ededf0 100%);
+    box-shadow: 0 1px 2px rgba(0,0,0,.1), 0 0 0 1px rgba(0,0,0,.06);
+  }
+  .key .main { font-size: 15px; font-weight: 600; line-height: 1; }
+  .key .sub { font-size: 8px; color: #86868b; font-weight: 500; margin-top: 1px; }
+  .key .shift-char {
+    position: absolute; top: 3px; right: 5px;
+    font-size: 9px; color: #aeaeb2; font-weight: 500;
+  }
+
+  .key.homerow {
+    background: linear-gradient(180deg, #e8f0fe 0%, #d4e4fc 100%);
+    box-shadow: 0 1px 2px rgba(0,122,255,.15), 0 0 0 1px rgba(0,122,255,.2);
+  }
+  .key.homerow .sub { color: #007aff; }
+
+  .key.accent {
+    background: linear-gradient(180deg, #fef3e8 0%, #fce5cc 100%);
+    box-shadow: 0 1px 2px rgba(255,149,0,.12), 0 0 0 1px rgba(255,149,0,.2);
+  }
+
+  .key.empty {
+    background: #fafafa;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.04);
+    color: #d1d1d6;
+  }
+  .key.bt {
+    background: linear-gradient(180deg, #eef0ff 0%, #dde2ff 100%);
+    box-shadow: 0 1px 2px rgba(88,86,214,.12), 0 0 0 1px rgba(88,86,214,.2);
+  }
+  .key.danger {
+    background: linear-gradient(180deg, #ffefef 0%, #fdd 100%);
+    box-shadow: 0 1px 2px rgba(255,59,48,.12), 0 0 0 1px rgba(255,59,48,.2);
+  }
+  .key.nav {
+    background: linear-gradient(180deg, #fff5e6 0%, #ffe8c4 100%);
+    box-shadow: 0 1px 2px rgba(255,149,0,.12), 0 0 0 1px rgba(255,149,0,.2);
+  }
+  .key.sym {
+    background: linear-gradient(180deg, #e6f9ed 0%, #c8f0d6 100%);
+    box-shadow: 0 1px 2px rgba(52,199,89,.12), 0 0 0 1px rgba(52,199,89,.2);
+  }
+  .key.mod {
+    background: linear-gradient(180deg, #f0ecfe 0%, #e0d8fc 100%);
+    box-shadow: 0 1px 2px rgba(175,82,222,.12), 0 0 0 1px rgba(175,82,222,.2);
+  }
+
+  .thumb-row { display: flex; justify-content: center; gap: 24px; margin-top: 4px; }
+  .thumb-half { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .key.thumb {
+    height: 38px; border-radius: 7px;
+    background: linear-gradient(180deg, #f0f0f2 0%, #e2e2e5 100%);
+    box-shadow: 0 1px 2px rgba(0,0,0,.1), 0 0 0 1px rgba(0,0,0,.08);
+  }
+  .key.thumb .main { font-size: 12px; }
+
+  .footer {
+    max-width: 1100px; width: 100%;
+    margin-top: 10px;
+    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  }
+  .info-card {
+    background: #fff; border-radius: 10px; padding: 8px 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 0 0 1px rgba(0,0,0,.04);
+    font-size: 11px; line-height: 1.6;
+  }
+  .info-card strong { font-weight: 600; }
+  .info-card .tag {
+    display: inline-block; padding: 1px 6px; border-radius: 4px;
+    font-size: 9px; font-weight: 600; vertical-align: middle;
+  }
+  .tag.blue { background: #e8f0fe; color: #007aff; }
+  .tag.orange { background: #fff5e6; color: #ff9500; }
+  .tag.red { background: #ffefef; color: #ff3b30; }
+  .tag.purple { background: #f0ecfe; color: #af52de; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .layer-card { box-shadow: 0 0 0 1.5px #ddd; }
+    .key { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Corne 42 touches — Layout BÉPO</h1>
+<div class="subtitle">ZMK envoie des keycodes HID US → Activer le layout BÉPO côté OS &nbsp;·&nbsp; Maintenir = action secondaire</div>
+
+<div class="grid">
+
+<!-- ==================== LAYER 0: BASE ==================== -->
+<div class="layer-card l0">
+  <div class="layer-header">
+    <span class="layer-badge">L0</span>
+    <span class="layer-name">Base BÉPO</span>
+    <span class="layer-hint">layer par défaut</span>
+  </div>
+  <div class="board">
+    <div class="half">
+      <div class="key std"><span class="main">W</span></div>
+      <div class="key std"><span class="main">B</span></div>
+      <div class="key std"><span class="main">É</span></div>
+      <div class="key std"><span class="main">P</span></div>
+      <div class="key std"><span class="main">O</span></div>
+      <div class="key accent"><span class="main">È</span></div>
+
+      <div class="key std"><span class="main">Ç</span></div>
+      <div class="key homerow"><span class="main">A</span><span class="sub">⌘ GUI</span></div>
+      <div class="key homerow"><span class="main">U</span><span class="sub">⌥ ALT</span></div>
+      <div class="key homerow"><span class="main">I</span><span class="sub">⌃ CTL</span></div>
+      <div class="key homerow"><span class="main">E</span><span class="sub">⇧ SHF</span></div>
+      <div class="key std"><span class="main">,</span><span class="shift-char">;</span></div>
+
+      <div class="key std"><span class="main">$</span><span class="shift-char">#</span></div>
+      <div class="key std"><span class="main">À</span></div>
+      <div class="key std"><span class="main">Y</span></div>
+      <div class="key std"><span class="main">X</span></div>
+      <div class="key std"><span class="main">.</span><span class="shift-char">:</span></div>
+      <div class="key std"><span class="main">K</span></div>
+    </div>
+    <div class="half">
+      <div class="key accent"><span class="main">^</span><span class="shift-char">!</span></div>
+      <div class="key std"><span class="main">V</span></div>
+      <div class="key std"><span class="main">D</span></div>
+      <div class="key std"><span class="main">L</span></div>
+      <div class="key std"><span class="main">J</span></div>
+      <div class="key std"><span class="main">Z</span></div>
+
+      <div class="key std"><span class="main">C</span></div>
+      <div class="key homerow"><span class="main">T</span><span class="sub">⇧ SHF</span></div>
+      <div class="key homerow"><span class="main">S</span><span class="sub">⌃ CTL</span></div>
+      <div class="key homerow"><span class="main">R</span><span class="sub">⌥ ALT</span></div>
+      <div class="key homerow"><span class="main">N</span><span class="sub">⌘ GUI</span></div>
+      <div class="key std"><span class="main">M</span></div>
+
+      <div class="key std"><span class="main">'</span><span class="shift-char">?</span></div>
+      <div class="key std"><span class="main">Q</span></div>
+      <div class="key std"><span class="main">G</span></div>
+      <div class="key std"><span class="main">H</span></div>
+      <div class="key std"><span class="main">F</span></div>
+      <div class="key std"><span class="main">Esc</span></div>
+    </div>
+  </div>
+  <div class="thumb-row">
+    <div class="thumb-half">
+      <div class="key thumb" style="background: linear-gradient(180deg,#fff5e6,#ffe8c4); box-shadow: 0 1px 2px rgba(255,149,0,.15), 0 0 0 1px rgba(255,149,0,.25);">
+        <span class="main">⇧ Maj</span><span class="sub">maintenir → NAV</span>
+      </div>
+      <div class="key thumb"><span class="main">Espace</span></div>
+      <div class="key thumb"><span class="main">⌫ Retour</span></div>
+    </div>
+    <div class="thumb-half">
+      <div class="key thumb"><span class="main">Entrée ↵</span></div>
+      <div class="key thumb" style="background: linear-gradient(180deg,#e6f9ed,#c8f0d6); box-shadow: 0 1px 2px rgba(52,199,89,.15), 0 0 0 1px rgba(52,199,89,.25);">
+        <span class="main">SYM</span>
+      </div>
+      <div class="key thumb" style="background: linear-gradient(180deg,#f0ecfe,#e0d8fc); box-shadow: 0 1px 2px rgba(175,82,222,.15), 0 0 0 1px rgba(175,82,222,.25);">
+        <span class="main">Suppr</span><span class="sub">maintenir → FN</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== LAYER 1: NAV ==================== -->
+<div class="layer-card l1">
+  <div class="layer-header">
+    <span class="layer-badge">L1</span>
+    <span class="layer-name">Navigation</span>
+    <span class="layer-hint">maintenir pouce G</span>
+  </div>
+  <div class="board">
+    <div class="half">
+      <div class="key empty"></div>
+      <div class="key empty"></div>
+      <div class="key empty"></div>
+      <div class="key empty"></div>
+      <div class="key empty"></div>
+      <div class="key empty"></div>
+
+      <div class="key empty"></div>
+      <div class="key mod"><span class="main">GUI</span></div>
+      <div class="key mod"><span class="main">ALT</span></div>
+      <div class="key mod"><span class="main">CTL</span></div>
+      <div class="key mod"><span class="main">SHF</span></div>
+      <div class="key empty"></div>
+
+      <div class="key empty"></div>
+      <div class="key nav"><span class="main">C-Z</span><span class="sub">annuler</span></div>
+      <div class="key nav"><span class="main">C-X</span><span class="sub">couper</span></div>
+      <div class="key nav"><span class="main">C-C</span><span class="sub">copier</span></div>
+      <div class="key nav"><span class="main">C-V</span><span class="sub">coller</span></div>
+      <div class="key empty"></div>
+    </div>
+    <div class="half">
+      <div class="key empty"></div>
+      <div class="key nav"><span class="main">Home</span></div>
+      <div class="key nav"><span class="main">Pg↓</span></div>
+      <div class="key nav"><span class="main">Pg↑</span></div>
+      <div class="key nav"><span class="main">End</span></div>
+      <div class="key nav"><span class="main">Ins</span></div>
+
+      <div class="key empty"></div>
+      <div class="key nav" style="font-size:18px"><span class="main">←</span></div>
+      <div class="key nav" style="font-size:18px"><span class="main">↓</span></div>
+      <div class="key nav" style="font-size:18px"><span class="main">↑</span></div>
+      <div class="key nav" style="font-size:18px"><span class="main">→</span></div>
+      <div class="key empty"></div>
+
+      <div class="key nav"><span class="main">Tab</span></div>
+      <div class="key nav"><span class="main">⇧Tab</span></div>
+      <div class="key empty"></div>
+      <div class="key empty"></div>
+      <div class="key empty"></div>
+      <div class="key empty"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== LAYER 2: SYM ==================== -->
+<div class="layer-card l2">
+  <div class="layer-header">
+    <span class="layer-badge">L2</span>
+    <span class="layer-name">Symboles &amp; Chiffres</span>
+    <span class="layer-hint">pouce D — SYM</span>
+  </div>
+  <div class="board">
+    <div class="half">
+      <div class="key sym"><span class="main">`</span></div>
+      <div class="key sym"><span class="main">#</span></div>
+      <div class="key sym" style="background:linear-gradient(180deg,#fffbe6,#fff3c4);box-shadow:0 1px 2px rgba(200,170,0,.12),0 0 0 1px rgba(200,170,0,.2)"><span class="main">1</span></div>
+      <div class="key sym" style="background:linear-gradient(180deg,#fffbe6,#fff3c4);box-shadow:0 1px 2px rgba(200,170,0,.12),0 0 0 1px rgba(200,170,0,.2)"><span class="main">2</span></div>
+      <div class="key sym" style="background:linear-gradient(180deg,#fffbe6,#fff3c4);box-shadow:0 1px 2px rgba(200,170,0,.12),0 0 0 1px rgba(200,170,0,.2)"><span class="main">3</span></div>
+      <div class="key sym" style="background:linear-gradient(180deg,#fffbe6,#fff3c4);box-shadow:0 1px 2px rgba(200,170,0,.12),0 0 0 1px rgba(200,170,0,.2)"><span class="main">4</span></div>
+
+      <div class="key sym"><span class="main">=</span></div>
+      <div class="key sym"><span class="main">@</span></div>
+      <div class="key sym"><span class="main">|</span></div>
+      <div class="key sym"><span class="main">&amp;</span></div>
+      <div class="key sym"><span class="main">(</span></div>
+      <div class="key sym"><span class="main">)</span></div>
+
+      <div class="key empty"></div>
+      <div class="key sym"><span class="main">&lt;</span></div>
+      <div class="key sym"><span class="main">&gt;</span></div>
+      <div class="key sym"><span class="main">+</span></div>
+      <div class="key sym"><span class="main">−</span></div>
+      <div class="key sym"><span class="main">/</span></div>
+    </div>
+    <div class="half">
+      <div class="key sym" style="background:linear-gradient(180deg,#fffbe6,#fff3c4);box-shadow:0 1px 2px rgba(200,170,0,.12),0 0 0 1px rgba(200,170,0,.2)"><span class="main">5</span></div>
+      <div class="key sym" style="background:linear-gradient(180deg,#fffbe6,#fff3c4);box-shadow:0 1px 2px rgba(200,170,0,.12),0 0 0 1px rgba(200,170,0,.2)"><span class="main">6</span></div>
+      <div class="key sym" style="background:linear-gradient(180deg,#fffbe6,#fff3c4);box-shadow:0 1px 2px rgba(200,170,0,.12),0 0 0 1px rgba(200,170,0,.2)"><span class="main">7</span></div>
+      <div class="key sym" style="background:linear-gradient(180deg,#fffbe6,#fff3c4);box-shadow:0 1px 2px rgba(200,170,0,.12),0 0 0 1px rgba(200,170,0,.2)"><span class="main">8</span></div>
+      <div class="key sym" style="background:linear-gradient(180deg,#fffbe6,#fff3c4);box-shadow:0 1px 2px rgba(200,170,0,.12),0 0 0 1px rgba(200,170,0,.2)"><span class="main">9</span></div>
+      <div class="key sym" style="background:linear-gradient(180deg,#fffbe6,#fff3c4);box-shadow:0 1px 2px rgba(200,170,0,.12),0 0 0 1px rgba(200,170,0,.2)"><span class="main">0</span></div>
+
+      <div class="key sym"><span class="main">[</span></div>
+      <div class="key sym"><span class="main">]</span></div>
+      <div class="key sym"><span class="main">{</span></div>
+      <div class="key sym"><span class="main">}</span></div>
+      <div class="key sym"><span class="main">~</span></div>
+      <div class="key sym"><span class="main">\</span></div>
+
+      <div class="key sym"><span class="main">*</span></div>
+      <div class="key sym"><span class="main">"</span></div>
+      <div class="key sym"><span class="main">«</span></div>
+      <div class="key sym"><span class="main">»</span></div>
+      <div class="key sym"><span class="main">%</span></div>
+      <div class="key empty"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== LAYER 3: FN ==================== -->
+<div class="layer-card l3">
+  <div class="layer-header">
+    <span class="layer-badge">L3</span>
+    <span class="layer-name">Fonctions &amp; Système</span>
+    <span class="layer-hint">maintenir pouce D</span>
+  </div>
+  <div class="board">
+    <div class="half">
+      <div class="key empty"></div>
+      <div class="key mod"><span class="main">F1</span></div>
+      <div class="key mod"><span class="main">F2</span></div>
+      <div class="key mod"><span class="main">F3</span></div>
+      <div class="key mod"><span class="main">F4</span></div>
+      <div class="key mod"><span class="main">F5</span></div>
+
+      <div class="key mod"><span class="main">F12</span></div>
+      <div class="key bt"><span class="main">BT 0</span></div>
+      <div class="key bt"><span class="main">BT 1</span></div>
+      <div class="key bt"><span class="main">BT 2</span></div>
+      <div class="key bt"><span class="main">BT ✕</span><span class="sub">clear</span></div>
+      <div class="key empty"></div>
+
+      <div class="key empty"></div>
+      <div class="key empty"></div>
+      <div class="key empty"></div>
+      <div class="key empty"></div>
+      <div class="key empty"></div>
+      <div class="key danger"><span class="main">Boot</span><span class="sub">flash</span></div>
+    </div>
+    <div class="half">
+      <div class="key mod"><span class="main">F6</span></div>
+      <div class="key mod"><span class="main">F7</span></div>
+      <div class="key mod"><span class="main">F8</span></div>
+      <div class="key mod"><span class="main">F9</span></div>
+      <div class="key mod"><span class="main">F10</span></div>
+      <div class="key mod"><span class="main">F11</span></div>
+
+      <div class="key empty"></div>
+      <div class="key std"><span class="main">⏮</span></div>
+      <div class="key std"><span class="main">Vol −</span></div>
+      <div class="key std"><span class="main">Vol +</span></div>
+      <div class="key std"><span class="main">⏭</span></div>
+      <div class="key empty"></div>
+
+      <div class="key danger"><span class="main">Reset</span></div>
+      <div class="key std"><span class="main">⏯</span></div>
+      <div class="key std"><span class="main">Muet</span></div>
+      <div class="key empty"></div>
+      <div class="key empty"></div>
+      <div class="key empty"></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="info-card">
+    <strong>Majuscules :</strong> taper <span class="tag blue">⇧ pouce G</span> puis la lettre,
+    ou maintenir <span class="tag blue">E</span> (main G) / <span class="tag blue">T</span> (main D) + lettre
+  </div>
+  <div class="info-card">
+    <strong>Combos :</strong>
+    T + S simultané → <span class="tag orange">Escape</span> &nbsp;·&nbsp;
+    Espace + Entrée → <span class="tag orange">Caps Word</span>
+  </div>
+  <div class="info-card">
+    <strong>Homerow mods :</strong> maintenir une touche <span class="tag blue">bleue</span> = modificateur (250ms)
+    &nbsp;·&nbsp; <span class="tag red">Rouge</span> = danger système
+  </div>
+</div>
+
+</body>
+</html>
