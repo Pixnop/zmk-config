@@ -82,7 +82,7 @@
                         bindings = <
                                 &trans       &trans       &trans       &trans       &trans       &trans          &trans       &kp HOME     &kp PG_DN    &kp PG_UP    &kp END      &kp INS
                                 &trans       &kp LGUI     &kp LALT     &kp LCTRL    &kp LSHFT    &trans          &trans       &kp LEFT     &kp DOWN     &kp UP       &kp RIGHT    &trans
-                                &trans       &kp LC(Z)    &kp LC(X)    &kp LC(C)    &kp LC(V)    &trans          &kp TAB      &kp LS(TAB)  &trans       &trans       &trans       &trans
+                                &trans       &kp LC(LBKT) &kp LC(C)    &kp LC(H)    &kp LC(U)    &trans          &kp TAB      &kp LS(TAB)  &trans       &trans       &trans       &trans
                                                                         &trans       &trans       &trans          &trans       &trans       &trans
                         >;
                 };
