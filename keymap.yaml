@@ -176,19 +176,18 @@ layers:
   - Vol −
   - Vol +
   - ⏭
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: RGB, s: ON/OFF}
+  - {t: RGB, s: Effet}
+  - {t: HUE, s: +}
+  - {t: SAT, s: +}
+  - {t: BRI, s: +}
   - {t: Boot, type: bootloader}
   - {t: Reset, type: bootloader}
   - ⏯
   - Muet
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: HUE, s: −}
+  - {t: SAT, s: −}
+  - {t: BRI, s: −}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
